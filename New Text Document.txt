@@ -1,0 +1,103 @@
+************************* JAVA INSTALL  ******************************
+yum install java-1.8*
+find /usr/lib/jvm/java-1.8* | head -n 3         
+>>output   /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.282.b08-2.el8_3.x86_64
+  now set home path under our home directory
+cd ~
+vi .bash_profile
+
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.282.b08-2.el8_3.x86_64
+PATH=$PATH:$HOME/bin:$JAVA_HOME
+:wq
+
+exit 
+sudo su -exit
+
+echo $JAVA_HOME
+
+
+*******************  JENKINS INSTALL   ********************************
+
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+cd /etc/yum.repos.d/
+curl -O https://pkg.jenkins.io/redhat-stable/jenkins.repo                         
+yum -y install jenkins
+systemctl start jenkins
+systemctl enable jenkins
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+
+**************************GIT INSTALL ***********************************
+yum install git -y
+github plugin > manage plugins
+global tool configuration > github 
+
+
+
+**************************  MAVEN SETUP *************** 
+cd /opt 
+wget https://mirrors.estointernet.in/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+tar -xvzf apaTAB
+mn apaTAB maven  > for better naming 
+cd maven 
+for maven we need to setup path for two variables M2_HOME that /opt/maven and M2 that is /opt/maven/bin
+vi ~/.bash_profile
+M2_HOME=/opt/maven
+M2=/opt/maven/bin
+PATH=:$M2:$M2_HOME   < append this
+:wq
+exit
+sudo su -
+mvn --version 
+now install maven intergration and maven invoker and config file plugin in jenkins
+
+now setup maven path 
+global tool configuration
+M2_HOME
+/opt/maven
+
+
+
+
+
+
+*******************  TOMCAT INSTALL   *************************** deploy to container plugin
+cd /opt
+yum install wget -y
+wget https://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.63/bin/apache-tomcat-8.5.63.tar.gz
+tar -xvzf apache-tomcatTAB
+mv apache-tomcTAB   tomcat  ---just for better naming we have changes name 
+cd tomcat
+cd bin 
+./startup.sh
+coy publicip:8080 on browser
+
+By default the Manager is only accessible from a browser running on the same machine as Tomcat. If you wish to modify this restriction, you'll need to edit the Manager's context.xml file.
+
+find / -name context.xml
+/opt/tomcat/webapps/manager/META-INF/context.xml
+vi /opt/tomcat/webapps/manager/META-INF/context.xml
+vi /opt/tomcat/webapps/host-manager/META-INF/context.xml
+./shutdown.sh
+./startup.sh
+now setup user and role:
+
+Update users information in the tomcat-users.xml file goto tomcat home directory and Add below users to conf/tomcat-user.xml file
+ vi tomcat-user.xml
+ <role rolename="manager-gui"/>
+ <role rolename="manager-script"/>
+ <role rolename="manager-jmx"/>
+ <role rolename="manager-status"/>
+ <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+ <user username="deployer" password="deployer" roles="manager-script"/>
+ <user username="tomcat" password="s3cret" roles="manager-gui"/>
+cd ../bin/ 
+./shutdown.sh
+./startup.sh
+
+
+
+
+
+ 
