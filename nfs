@@ -1,0 +1,76 @@
+service profile 
+
+SERVER FILE
+package : nfs-utils 
+DAemon  : nfs-server 
+port no. : 2049[nfs] & 111[porstmap or RPC]
+data sharing : /etc/exports ->to share any data 
+configuration file : /etc/sysconfig/nfs
+ 
+CLIENT SIDE  
+#mount source destination [temporary mounting ]
+#vim /etc/fstab [permanent mounting]
+
+
+yum install nfs* -y 
+systemctl start nfs-server 
+systemctl enable nfs-server 
+
+firewall-cmd --list-services 
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --permanent --add-service=rpc-bind 
+firewall-cmd --permanent  --add-service=mountd
+firewall-cmd --reload
+
+netstat -tunlp | grep 2049
+netstat -tunlp | grep 111
+
+mkdir /java 
+mkdir /php 
+ touch /java/abc{1...5}
+ touch /php/xyz{1...5}
+echo "hello java" > /java/abc1
+cat /java/abc1
+
+echo "hello php" >  /php/abc1
+chmod 777 /php     --------------------> isko writable mode m rkhna hai 
+
+cat /etc/exports
+vim /etc/exports
+
+
+/java  *(ro)
+/php  192.168.0.0/24(rw)
+
+:wq 
+
+systemctl restart nfs-server
+exportfs 
+exportfs  -r 
+or 
+systemctl reload nfs-server 
+showmount -e 
+showmount -e 192.168.0.10 
+
+rpc info  -p
+
+
+
+ON-CLIENT 
+
+ifconfig 
+ping 192.168.0.10
+ping 192.168.0.20
+
+show mount -e 192.168.0.10
+mkdir /data1 
+mkdir /data2 
+mount  192.168.0.10 :/java   /data1
+ls /data1
+mount 192.168.0.1  : /php   /data2
+vim /etc/fstab ( permanent mounting )
+192.168.0.10 : /java   /data1 nfs default  0  0 
+
+
+server se mounting band krni ho to 
+vim /etc/exports   ---> m line comment krdo 
