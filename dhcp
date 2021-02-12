@@ -1,0 +1,103 @@
+SERVER SIDE : 
+package : dhcp 
+Daemon : dhcpd 
+file : /etc/dhcp/dhcp.conf 
+log : /var/log/messages
+
+leasefile - /var/lib/dhcpd/dhcpd.leases
+port no -67 [server side]
+         68 [client side]
+
+CLIENT SIDE : 
+how to take ip using dhcp server 
+1. using nmcli command 
+2 we can dp dirct entry entry in lan card or 
+ interface protocol 
+
+ BOOTPROTO = dhcp 
+ yum install dhcp* -y 
+ cat /etc/dhcp/dhcp.conf   ---> is file m entry karni hoti hai 
+ cat  -n /usr/share/doc/dhcp-server/dhcp.conf.example ---->  syntax is file se mil jaiga
+ copy line 47,55-->
+ sed -n "47,55p" /usr/share/doc/dhcp-server/dhcp.confexample
+ vim /etc/dhcp/dhcp.conf 
+ paste 
+ subnet 192.168.0.0  network 255.255.255.0{
+     range 192.168.0.1 192.168.0.254;
+     option domain-name server 192.168.0.250;
+     optiuon ntp-servers  192.168.0.10
+     option routers 192.168.0.1  
+     option broadcast_address 92.168.0.255;
+     deafult-lease time 600;
+     max-lease time 7200;
+
+ }
+
+ systemctl start dhcp 
+ sytemctl enable dhcp 
+
+
+ firewall-cmd --list-services 
+ firewall-cmd --permanent --add-service=dhcp 
+ firewall-cmd --reload 
+ firewall-cmd --list-services
+ netstat -tunlp | grep 67 
+
+MACHINE 2 (testing k lia)  
+
+
+ifconfig 
+cat /etc/sysconfig/network-script/if cfg-xyz
+BOOTPROTO=none -->means DHCP nhi hai 
+
+nmcli connnection show 
+nmcli connection delete xyz 
+
+nmcli  connection add con-name xyz ifname ens160 type ethernet autocorrect yes 
+nmcli connection show 
+
+cat /etc/sysconfig/network-scripts/ifcfg-xyz 
+
+if config 
+
+cat /etc/resolv.config
+
+iproute 
+cat  /var/log/messages 
+grep "00.06.29.97:be:fe" /var/lib/dhcpd/dhcpd.leases
+
+cat /var/lib/dhcpd/dhcpd/leases
+cat /var/lib/dhcp/dhcp/leases | grep -E -i lease | ethernet 
+
+
+
+
+
+*****************DHCP MAC RESERVATION ************************
+
+cat -n /usr/share/doc/dhcp-server/dhcp.conf.example 
+sed -n "75,78p"  /usr/share/doc/dhcp-server   /dhcp.conf.example
+
+vim /etc/dhcp/dhcpd.conf  
+ paste 
+ host station20{
+     hardware ethernet 00:0c:29:be:fe ;
+     fixed-address 192.168.0.100
+    }
+
+
+systemctl restart dhcpd
+
+ifconfig | less 
+ifdown xyz
+ifup xyz 
+ifconfig ens160 
+
+
+
+
+
+
+ }
+
+
