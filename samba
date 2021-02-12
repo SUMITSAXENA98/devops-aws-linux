@@ -1,0 +1,109 @@
+yum install smb -y 
+systemctl start smb 
+systemctl enable smb 
+firewall-cmd --permanent -add-service=samba
+firewall-cmd --reload
+
+
+mkdir /publicdata
+mkdir /privatedata
+
+touch /publicdata/abc{1...5}
+touch /privatedata/abc{1...5}
+
+
+echo "hello publicsdata" > /publicdata/abc1
+echo "hello priovatedata" > /privatedata/xyz1
+
+chmod 777  /privatedata
+
+useradd sachin 
+userdel alok  
+smbpasswd  -a   sachin 
+smbpasswd   -a   alok 
+vim  /etc/samba/smb.conf  
+ [global] 
+ hostallow=127.     192.168.0.
+
+ [network] 
+ comment = this is my public sahring data 
+ path = /publicdata
+ public = yes
+writable = no 
+printable = no 
+browsable = yes 
+
+ [cloud]
+comment = thus is my sharing dat 
+path = /privatedata
+public = no 
+writable =yes 
+printable= no 
+browsable = yes 
+valid user = sachin alok  
+:wq 
+
+
+systemctl restart samba 
+testparm --------> file m error check krne k lia 
+
+getenforce 
+
+ls -ld  /publicdata
+ls -ldz /publicdata
+
+chcon -R -t  samba_share_t  /publicsdata
+chcon  -R  -t samba_share_t  /privatedata
+
+ls -ldz /publicdata 
+ls  -laz /privatedata  
+systemctl restart smb 
+netstat -tunlp | grep smb
+
+
+
+CLIENT SIDE SMB 
+ how to perform downloading and uploading opertion using smb client command 
+ ping  192.168.0.10  (server ping check)
+
+ yum install samba-client -y 
+ smbclient -L  //192.168.0.10  /network 
+
+ ls 
+ get abc1
+ mget abc1 | abc2 
+
+
+
+
+
+################  HOW TO PERFORM MOUNTING  *#################
+
+
+yum install cifs -utils -y 
+mkdir /public 
+mkdir /private 
+
+
+mount -t cifs  /192.168.0.10/network          /public  -o  guest 
+mount -t cifs  /192.168.0.10/network/cloud    /private  -o username=sachin 
+
+vim /etc/fstab ---> permanently mounting 
+
+
+//192.168.0.10/network  /public  cifs default , guest 0  0  
+//192.168.0.10/cloud    /private cifs 0  0  default  ,username=sachin password=redhat 
+
+
+##################   HOW TO PASS USERNAME AND PASSWORD USING FILE METHOD    ###################
+
+vim   /root/username.txt  
+username = sachin
+password = redhat 
+
+vim /etc/fstab 
+
+//192.168.0.10/cloud   /private cifs defaults, credentials=/root/username.txt  0  0 
+
+
+
