@@ -1,0 +1,96 @@
+SERVICE PROFILE 
+package : vsftpd 
+Daemon : vsftpd 
+file: /etc/vsftpd/vsftpd.conf 
+log : /var/log/xferlog 
+        or 
+      /var/log/vsftpd.log 
+port no. 21 {server side } or control connection 
+         22 {client side} or data connection
+           
+
+home directory of ftp user ---> /var/ftp
+home direcotry of Normal user ----> /home/deepak 
+
+
+yum install vsftpd -y 
+systemctl start vsftpd 
+systemctl enable vsftpd
+
+firewall-cmd --list-services 
+             --permanent --add-service=ftp 
+             --reload 
+
+netstat -tunlp |  grep  vsftpd 
+grep ftp /etc/passwd  -----> default ftp user bn gaya hoga 
+
+useradd deepak 
+passwd deepak 
+ 
+grep deepak /etc/deepak 
+ftp ://192.168.0.100  ----> on browser 
+cd  /var/ftp 
+ls -----> default folder pub 
+
+CLIENT SIDE 
+su deepak 
+touch deep1 deep2 
+ll 
+
+yum install ftp 
+ftp 192.168.0.100
+ 
+name : ftp 
+passwod : enter your password 
+
+pwd 
+ls 
+get tcs1
+mget tcs1 tcs2
+
+prompt -------> multiple file download commmand
+
+to turn off/on interactibve mode means yes baar baar nhi krna padega 
+
+lcd /tmp   ----> to change download location 
+
+
+echo "hello linux " > redhat 
+cat redhat 
+ftp   192.168.0.100
+
+deepak 
+passwd 
+
+put redhat ---> upload on server 
+ls 
+ftp ka advance command ----> isme tab kaam kr jata hai 
+lftp 
+yum install | ftp -y 
+lftp 192.168.0.100 
+lftp -u deepak 192.168.0.100
+sftp root @192.168.0.100
+yes 
+sftp deepak @192.168.0.100
+ls 
+get redhat   ------> root k login krne k lia sftp se jana kyunki ftp m data plain text m tranfer hota hai 
+
+
+
+HOW TO CONFIGURE CHROOT JAIL ENVIROMENT 
+
+vim /etc/vsftpd/vsftpd-config 
+
+chroot_local_user=yes 
+allow_writable_chroot=yes 
+
+
+systemctl restart vsftpd 
+
+
+
+
+
+
+
+
