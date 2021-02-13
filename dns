@@ -1,0 +1,113 @@
+****************************** DOMAIN NAME SYSTEM ***************************
+  IP <-----> IP
+  IP <-----> HOST 
+
+  /etc/hosts ---> we connection more than one machine using name with the help of this file 
+
+  /etc/resolv.conf  ----->Mention DNS server (Automatically all machine resolve with thier hostname as per defined in DNS server zone file )
+
+ 
+
+• DNS stands for Domain Name System, or Domain Name Server.
+• DNS resolves an IP address to a hostname or vice versa.
+• For users, this has the advantage that they can refer to machines 
+on the network by names that are usually easier to remember than 
+the numerical network addresses.
+• BIND stands for Berkley Internet Naming Daemon.
+• BIND is the most common program used for maintaining a name 
+server on Linux.
+• DNS is organized as a hierarchy. Consider the following translation: 
+www.google.com = 209.85.225.104
+• The DNS hierarchy begins with the root domain “ . “ symbol.
+Structure of a DNS
+
+
+The Top Level Domains are divided into 2 categories:
+▪ 1. Generic TLD (gTLD)
+▪ 2. Country Code TLD (ccTLD)
+
+
+Below are some of the common Generic Top Level Domains:
+▪ .com – comercial web sites
+▪ .org – non profit organizations web sites
+▪ .edu – restricted to schools and institutions.
+▪ .net – originally for network infrastructures
+Below are some for the Country Code Top Level Domains:
+▪ .us – United States
+▪ .in – India
+▪ .uk – United Kingdom
+▪ .ru – Russia
+
+
+Domain: A Domain is any tree or sub-tree within the overall domain 
+namespace.
+• Root Domain: Root Domain is the root of the DNS tree. It is unnamed and 
+is represented by a period (.).
+
+• Top-level Domain: Usually top-level domain name is a two or three 
+character name code that identifies the organizational or geographical status 
+for the domain name.
+Example, .com, .biz, .net, .org, .gov, .in, .au etc.
+
+• Second-level Domain: A second level domain is a unique name of variable 
+length assigned to individuals or organizations that connect to the internet. 
+Example: myuniversity.edu. Here second level name refers to 
+“.myuniversity”, which is assigned by InterNIC.
+
+• Sub Domains: Large organizations can further subdivide its registered 
+domain name by adding subdivisions that are represented by separate name 
+portion.
+Example: mcse.omnisecu.com, rhce.omnisecu.com
+
+
+Types of DNS Servers
+There are three types of DNS servers:
+• Primary DNS servers: They contain the domain’s configuration files and 
+they respond to the DNS queries.
+
+• Secondary DNS server: They work as a backup and load distribution. 
+Primary servers know the existence of the secondary name servers and 
+send updates to them.
+
+• Caching DNS server: All they do is caching the DNS responses so you 
+don’t need to ask the primary or secondary DNS server again. You can 
+make your system work as a caching server easily as we will see later on 
+this post.
+
+
+
+Types of Zone File:
+What is Zone in DNS ?
+one files contain information about the portion of a domain for which 
+they are responsible
+ OR
+DNS Zones provide us a way to maintain these records on one or more 
+servers
+• Forward Zone file- forward lookup zone converts any querry name 
+to IPaddress
+• Reverse Zone File- reverse lookup zone converts IPaddress to 
+name.
+Types of DNS Records :- • A ( Address ): The A record maps the hostname to an IP 
+address.
+• PTR ( pointer) : A PTR record maps the IP address to a specific 
+host.
+• CNAME ( Canonical Name ) : 
+1. CNAME records are like shortcuts for host names.
+2. Maps an alias to the canonical name
+• NS : NS record maps a domain name to a DNS name server which 
+is authoritative for its DNS zone
+• MX Record: An MX record or mail exchange record maps a domain 
+name to a list of mail exchange servers for that domain. For 
+example, when you send a mail to alpha@example.com, the mail 
+will be routed to the Mail Server as specified in MX record.
+• SOA ( Server of authority ) - Indicates authority for this zone.
+• NS ( Nameserver )- Lists a name server for this zone
+ 
+DNS Service Profile
+Package: bind
+Daemon: named 
+Port number: 53
+File : /etc/named.conf
+Zone Place: /var/named
+Log file: /var/log/messages
+
