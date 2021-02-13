@@ -8,6 +8,16 @@
 
  
 
+DNS Service Profile
+Package: bind
+Daemon: named 
+Port number: 53
+File : /etc/named.conf
+Zone Place: /var/named
+Log file: /var/log/messages
+
+ 
+
 • DNS stands for Domain Name System, or Domain Name Server.
 • DNS resolves an IP address to a hostname or vice versa.
 • For users, this has the advantage that they can refer to machines 
@@ -103,11 +113,3 @@ will be routed to the Mail Server as specified in MX record.
 • SOA ( Server of authority ) - Indicates authority for this zone.
 • NS ( Nameserver )- Lists a name server for this zone
  
-DNS Service Profile
-Package: bind
-Daemon: named 
-Port number: 53
-File : /etc/named.conf
-Zone Place: /var/named
-Log file: /var/log/messages
-
