@@ -1,0 +1,125 @@
+docker images  ------>see all images present in local machine 
+docker search jenkins -----> to search images in docker hub 
+docker pull image name ------> pull from hub 
+docker run -it --name containername  ubuntu   /bin/bash -----> to give container name 
+service docker status ------> to check service start or not 
+service docker start ---------> start service 
+docker start containername ---------> to start container 
+docker attach continername ---------> to go inside container 
+docker ps -a -----------> to see all container
+docker ps -------->to see running container 
+docker stop containername ------->to stop container 
+docker rm containername----------> to delete container 
+exit ----->to exit container 
+
+
+
+docker diff containername ------> [after creating container we create files and made some changes in machine or container]now to see changes in that]
+
+output : e  /roots
+         A  /root/bash-           D => deletion
+         c  /tmp                  c => change
+         A   /tmp/myfile          A =>append 
+
+now create images from container 
+docker commit new-containername updated-image{image-name_that is_to_be_created}
+
+now create container from this image 
+docker run -it --name sumitcontainer imagename
+
+
+
+*********************  DOCKER-FILE  ************************
+FROM 
+RUN
+MAINTAINER
+COPY 
+ADD 
+EXPOSE 
+WORKDIR 
+CMD 
+ENTRYPOINT 
+ENV 
+ARG 
+
+
+
+TO CREATE IMAGE FROM DockerFile
+docker build -t myimg 
+
+
+
+******************** DOCEKR VOLUME ************************
+-volume is a simple direction our container
+-first,we have to declare a directory as a volume and then share volume 
+-even if we stop containerstill we can access volume 
+-volume will be created in one container 
+-you can declare a directory as a volume only while creating a container 
+-you can't create volume from existing container 
+- you can share one volume across any no. of containers
+-volume will not be included when you update an image 
+-you can mapped volumes in 2 ways 
+container <------------> container 
+host <---------------> container 
+
+BENEFITS:
+-decoupling container from storage 
+-shared volume among different containers 
+-atttach volume to conatiner 
+-on deleteing container volume doesn't delete 
+
+CREATING VOLUME FROM DOCKER FILE:
+vi Dokerfile 
+FROM ubuntu 
+VOLUME ["/myvolume"]
+ now create image from this file 
+ docker build -t myimage
+ now create container 
+ docker run -it --name conatiner1 myimg  /bin/bash
+now share volume with another container [container1<------>conatiner2]
+docker run -it --name conatiner2 --priveledged=true --volume-from container1 ubuntu /bin/bash ("conatiner2 banega ar volume map sath m hi krna hota hai)
+now you can create 
+files in volume1 directory or volume you can see data in both container 
+
+
+CREATING VOLUME USING COMMAND:
+docker run -it --name container4 --priveledge=true --volumes-from container3 ubuntu /bin/bash 
+(/volume2 m kuch file daldo test k lia )
+
+mow create one more container and share /vomune2
+
+docker run -it --name container4 --priveledge=true --volumes-from conatiner3 ubuntu /bin/bash 
+(dono conatiner m /volume2 directory hogi)
+
+VOLUMES  (HOST <-------> CONATAINER)
+
+verify files /home/ec2-user 
+docker run -it --name hostcont -v  /home/ec2-user:/rajput  --privledges=true ubuntu  /bin/bash 
+
+SOME OTHER COMMAND:
+docker volume ls 
+docker volume create <volumename>
+docker volume rm <volumename>
+docker volume prune <volumename>
+docker volume inspect <volumename>
+docker conatainer inspect <conatinername>
+
+
+DOCKER PORT EXPOSE:
+docker run -td --name techserver -p 80:80 ubuntu 
+docker port techserver 
+output: 80/tcp--> 0.0.0.0/80
+
+docker exec -it techserver /bin/bash 
+apt -get update ---> ubuntu update krne k lia hai 
+apt -get install apache2
+cd /var/www/html 
+echo "subscribe tech " > index.html 
+server apache2 start 
+
+docker run -td --name myjenkins -p 8080:8080 jenkins 
+
+
+
+
+difference btw docker attach and docker exec
