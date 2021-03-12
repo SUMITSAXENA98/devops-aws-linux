@@ -16,6 +16,59 @@ File : /etc/named.conf
 Zone Place: /var/named
 Log file: /var/log/messages
 
+
+yum install bind -y 
+ll /etc/named.conf 
+grep named /etc/passwd 
+grep named /etc/group 
+
+vim /etc/named.conf 
+
+option {
+    listen-on port 53 { DNS ip ;} ;
+    directory  "/var/named";
+
+    
+    
+    allow-query{any;};
+    }
+
+    dnsec-enable  no;     #because validation k lia hota key pair 
+    dnsec-validation no ;
+    line no 45,7 delete kro because main file m entry krnge hum 
+
+    cat -n /etc/named.rfc1912.zone
+
+    19,23;31,35 copy krlo 
+    sed -n "19,23p;31,3p"  /etc/named.rfc1912.zone
+    copy
+    vim /etc/named.conf  
+    paste 
+    zone "example.com" IN {
+        type master;
+        file "forward.zone";
+        allow-update {none;};
+    };
+    zone "0.168.192.in-addr.arpa" IN {
+        type master;
+        file "reverse.zone";
+        allow-update {none;};
+    };
+
+    cd /var/named
+    ll 
+    cp   named.localhost   forward.zone 
+    cp   named.loopback    reverse.zone 
+    chgrp   named   forward.zone reverse.zone 
+    vim forward.zone 
+    
+
+
+    }
+
+
+
+
  
 
 • DNS stands for Domain Name System, or Domain Name Server.

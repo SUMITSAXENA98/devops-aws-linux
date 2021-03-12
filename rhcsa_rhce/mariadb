@@ -1,0 +1,47 @@
+************************** MARIA-DB ***************************
+package name : mariadb-server 
+daemon : mariadb
+port no : 3306
+log : /var/log/mariadb/mariadb.log 
+
+file - /etc/my.cnf 
+database location - /var/lib/mysql 
+note: ip config and yum configure hona chaiye
+ yum install mariadb* -y 
+ systemctl start mariadb 
+ systemctl enable mariadb 
+systemctl status firewalld or iptables 
+firewall-cmd --permanent  --list-services 
+firewall-cmd --permanent --add-service=mysql 
+
+firewall-cmd --reload 
+netstat -tunlp | grep 3306
+
+mysql_secure_installation 
+y  ->  set root pass 
+y -> remove anonymous user 
+y  -> disable root login remotely 
+y -> remove test database 
+
+mysql -u root -p 
+ 
+
+create database user :- 
+create user harry@localhost identified by 'password' 
+create user natasha@'192.168.0.10' identified by 'password' 
+                   @'192.168.0.%'   
+                
+select user(); 
+
+
+GIVE USER DATABASE PERMISSION :- 
+
+grant select,insert on inventory.product to harry@localhost;
+grant all on inventory.* to rajeev@'%'; 
+ 
+
+DATABASE BACKUP :- 
+mysqldump -u root -p inventory > /tmp/inventory-13-0-6.dump 
+mysqldump -u root -p --all-database > /tmp/all-db-13-06.dump 
+
+

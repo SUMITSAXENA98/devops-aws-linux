@@ -97,6 +97,48 @@ cd ../bin/
 ./startup.sh
 
 
+***************** INTEGRTAING DOCKER WITH JENKINS **********************
+install plugin publish over ssh 
+store credentials of dockerhost on jenkins server
+create a user in docker server ---> dockeradmin 
+useradd dockeradmin
+passwd dockeradmin 
+this user must be part of docker group  
+cat  /etc/group 
+usermod -aG  docker dockeradmin  --> add user to docker group
+id dockeradmin
+vi /etc/ssh/shhd _config > passwoerd authentication yes
+now provide this credentials to jenkins server 
+manage jenkins >configure system >publish over ssh
+give name hostname{ip} username >advanced 
+use password based authentication >givepassword and test connection
+
+
+*******copy artifact form jenkins to dockerhost **********
+postbuil action > send buid artifact over ssh 
+sourcefile > webapp/target/*.war 
+remove prefix > webapp/target 
+remotedirectory > . 
+save 
+
+cretae docker file
+vi Dockerfile
+FROM tomcat:latest
+MAINTAINER: Sumit
+copy: ./webapp.war  /usr/local/tomcat/webapps
+:wq 
+docker build -t devops-project 
+docker images 
+docker run --name devops-container -p 8080:8080 devops-project 
+
+deploy war file into docler conatiner:
+create job 
+postbuildaction> 
+
+
+
+********* INTEGRATE ANSIBLE WITH JEKINS **********
+
 
 
 
