@@ -30,17 +30,17 @@ docker run -it --name sumitcontainer imagename
 
 
 *********************  DOCKER-FILE  ************************
-FROM 
-RUN
-MAINTAINER
-COPY 
-ADD 
-EXPOSE 
-WORKDIR 
-CMD 
-ENTRYPOINT 
-ENV 
-ARG 
+FROM : for basic image 
+RUN : to execute command ,it will create a layer in image 
+MAINTAINER : author/owner 
+COPY : copy files from local system providing source and destination [note:cannot download from internet]
+ADD : similar to COPY but also download from internet
+EXPOSE : to expose ports, such as 8080 for tomcat port 80 for nginx 
+WORKDIR : to set working dorectory of container 
+CMD : excute commands but during container 
+ENTRYPOINT : similar to CMD ,but has higheer priority over CMD, first commands will be executed by ENTRYPOINT only 
+ENV : enviromental variable 
+ARG : 
 
 
 
