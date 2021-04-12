@@ -1,0 +1,13 @@
+create vpc 
+create 2 subnet (public and private)
+lauch ec2 open vpn form aws market place (public subnet m bnana hai)
+security group  anywhere ekr dena 4 rule dikhenge 
+putty se access lena 
+loginas: openvpnas
+enter 
+enter ...
+copy  clientUI : http...
+
+
+
+

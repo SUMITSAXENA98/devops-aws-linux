@@ -1,0 +1,20 @@
+s3 transfer acceleration:
+when anyone download our object on s3 to thier machine 
+downlaod speed increase krna k lia transfer acceleration enable krna 
+isse hot kya hai data jo hai edgeserver  location se download hoga 
+url alag hota hai pr enable krne k baad 
+
+
+s3 Requester pay:
+
+
+
+
+s3 storage classes:(pricing factor)
+s3 standard (3 replication)
+s3 standard IA (3 replication)
+Glacier (3 replication)
+s3 intelligent tiering 
+One zone IA 
+Deep glacier 
+

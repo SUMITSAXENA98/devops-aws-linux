@@ -1,0 +1,6 @@
+used instead of NAT gateway 
+
+create 2 subnets (public and private )
+create 2 instance one in public and one in privatev 
+create vpc endpoint 
+

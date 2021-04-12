@@ -1,0 +1,41 @@
+
+
+vpc  > cidr 10.0.0.0/16                 16bit networkreserverd
+subnets > 10.0.0.0/24                   24 networksbit  8 bit for  256 host
+igw 
+route table > subnet aosociate > route 
+
+
+
+
+VPC with public subnet and private subnet and NAT Gateway(IN PUBIC SUBNET)
+
+vpc  > cidr 10.0.0.0/16                 16bit networkreserverd
+subnets > 10.0.0.0/24 (public)
+          10.0.1.0/24 (private)
+igw 
+route table > make 2 route table (public and private )
+    in  public > associte routetable and define route igw 
+    in privete > only associate route table 
+
+now to test make intsance on both subnet 
+note pubnet subnet k andar ec2 create krte time  publicIP disable rkhna hai 
+
+
+to ssh on privateinstnce via public 
+.pem vali file public instance m honi chiaye 
+file bnakr chmod 600 
+ssh ec2-user@publicip -i filiname.pem
+
+
+now NAT GATEWAY CREATE VALI LAB 
+create NAT gateway  in public subnet
+ELASTIC IP Milega
+
+
+
+vpc Peering connection
+
+note icmp protocol add krna secutrity group m 
+route table k routes  m route add krna cidr and vpc-peering val 
+ 

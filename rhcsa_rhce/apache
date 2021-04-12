@@ -1,0 +1,12 @@
+file name --> etc/httpd/conf/httpd.conf
+
+
+yum install httpd* -y 
+systemctl start httpd
+systemctl enable httpd 
+firewall-cmd --permanent --add-service=httpd
+firewall-cmd --reload 
+netstat -tunlp | grep httpd 
+cat /var/www/html/index.html 
+
+now 
