@@ -1,0 +1,58 @@
+create VPC in 2 region   [mumbai and singapore]
+create one insatnce with security group > SSH,TCP, ICMP
+now go to mumbai -> cretae virtual private gateway 
+create customer gateway --> enter public ip of singapore region
+create site to site von connection  and add subnet of customer end 
+now go to route table---> add route propogation 
+now download configuration from site to site vpn page
+
+
+now go to customer side take access ec2 : 
+
+1.  Commands for Installation of Openswan
+    i. Install openswan:
+                $ yum install openswan -y
+    ii. vim /etc/ipsec.conf 
+          uncommented:
+                 include /etc/ipsec.d/*.conf
+    iii. vim  /etc/sysctl.conf and write
+               
+                net.ipv4.ip_forward = 1
+                net.ipv4.conf.all.accept_redirects = 0
+                net.ipv4.conf.all.send_redirects = 0
+    
+    iv. Restart network service:
+                $ service network restart          
+
+
+2. vim  /etc/ipsec.d/aws-vpn.conf
+conn Tunnel1
+        authby=secret
+        auto=start
+        left=%defaultroute
+        leftid=Customer end Gateway VPN public IP   <----------
+        right=AWS Virtual private gateway ID- public IP      <---------
+        type=tunnel
+        ikelifetime=8h
+        keylife=1h
+        phase2alg=aes128-sha1;modp1024
+        ike=aes128-sha1;modp1024
+        keyingtries=%forever
+        keyexchange=ike
+        leftsubnet=Customer end VPN CIDR   <-------ex 10.2.0.0/16
+        rightsubnet=AWS end VPN CIDR       <-------ex 10.1.0.0/16
+        dpddelay=10
+        dpdtimeout=30
+        dpdaction=restart_by_peer
+
+3. Contents 
+        vim  /etc/ipsec.d/aws-vpn.secrets
+
+customer_public_ip aws_vgw_public_ip: PSK "inBAKPCa.UhrukIKC2_vTWZh4Q1hHocH"
+
+4. Commands to enable/start ipsec service
+           $ chkconfig ipsec on
+           $ service ipsec start
+           $ service ipsec status
+
+END .....................

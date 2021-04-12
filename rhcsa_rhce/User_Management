@@ -1,0 +1,74 @@
+useradd deepak
+passwd deepak 
+grep deepak /etc/passwd 
+id deepak 
+groups deepak 
+
+
+how to modify comment field of any user ?
+usermod -c "Itadmin" deepak 
+grep deepak /etc/deepak 
+
+how to change login shell of any user ?
+usermod -s /sbin/nologin 
+grep natasha /etc/passwd 
+
+how to add user with specific userID and groupID ?
+useradd -u 3000 harry 
+passwd  harry 
+grep harry /etc/passwd 
+grep harry /etc/group 
+id harry 
+usermod -u 4000 harry 
+grep harry /etc/passwd 
+grep harry /etc/group 
+groupmod -g 5000 harry 
+grep harry /etc/passwd 
+grep harry /etc/group 
+
+
+how to change login name or account name of an user?
+usermod -l neeraj sarah 
+su -sarah 
+su -neeraj 
+
+how to lock and unlock any user account ?
+useradd rajeev 
+passwd rajeev 
+usermod -L rajeev 
+passwd -l rajeev 
+passwd -S rajeev 
+passwd -u rajeev 
+usermod -U rajeev 
+passwd -s rajeev 
+ 
+how to delete password prompt for any user ?
+useradd deep 
+passwd -d deep 
+su -deepak 
+su -deep
+now you can set password of this user if it is required passwd deep 
+
+useradd monika /etc/passwd 
+grep monika /etc/passwd 
+grep monika /etc/shadow 
+passwd monika 
+
+grep monika /etc/shadow 
+passwd -l monika 
+
+grep monika /etc/shadow 
+passwd -u monika 
+
+grep monika /etc/shadow 
+passwd -d monika 
+
+grep monika /etc/shadow 
+passwd monika 
+
+
+
+
+
+
+
