@@ -1,0 +1,51 @@
+VIRTUAL HOSTING 
+cd /var/www
+mkdir goole
+mkir yahoo
+cd google
+echo "this is google page" > google.html
+cd yahoo
+echo "This is yahoo page" > yahoo.html
+ vim /etc/httpd/conf/httpd.conf   
+ 
+ <virtual host  192.168.0.10:80>
+ serveradmin root@station1.example.com
+ server name station1.example.com
+ documentroot /var/ww/html
+ serveralias example.com
+ </virtualhost>
+ 
+ <virtual host  192.168.0.10:80>
+ serveradmin root@station1.example.com
+ server name google.example.com
+ documentroot /var/www/google
+ serveralias google.com
+ </virtualhost>
+ 
+ <virtual host  192.168.0.10:80>
+ serveradmin root@station1.example.com
+ server name yahoo.example.com
+ documentroot /var/www/yahoo
+ serveralias yahoo.com
+ </virtualhost>
+ 
+ 
+ <directory /var/www/google>
+ required all granted 
+ <directory>
+ 
+ 
+ <directory /var/www/yahoo>
+ require all granted 
+ <directory>
+ 
+ 
+ 
+ vim /etc/hosts ------> entry in this because we don't have dns right now
+ 192.168.0.10  google.exmaple.com   google.com
+ 192.168.0.10  yahoo.exmaple.com   yahoo.com
+ 
+ 
+ 
+ 
+ 
