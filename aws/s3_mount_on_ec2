@@ -10,11 +10,12 @@ s3 Requester pay:
 
 
 
-s3 storage classes:(pricing factor)
-s3 standard (3 replication)
-s3 standard IA (3 replication)
-Glacier (3 replication)
-s3 intelligent tiering 
-One zone IA 
-Deep glacier 
+####### s3 storage classes:(pricing factor) ########
+
+> s3 standard (3 replication) : storagecost high accessing charge less largest object 5gb {99.99999% availablity and durablity}
+> s3 standard IA (3 replication): 
+> Glacier (3 replication)
+> s3 intelligent tiering 
+> One zone IA 
+> Deep glacier 
 
