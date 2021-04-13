@@ -8,7 +8,7 @@
 
  
 
-DNS Service Profile
+DNS Service Profile 
 Package: bind
 Daemon: named 
 Port number: 53
@@ -60,12 +60,44 @@ option {
     cp   named.localhost   forward.zone 
     cp   named.loopback    reverse.zone 
     chgrp   named   forward.zone reverse.zone 
-    vim forward.zone 
     
+    
+    vim forward.zone 
+$TTL 1D
+@       IN SOA station1.example.com. root.station1.exmaple.com. (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+          NS    station1.exmaple.com
+          A     127.0.0.1
+station1  A     172.31.32.206
+station2  A     172.31.32.209
+dnsmaster A     station1
 
 
-    }
+vim reverse.zone
 
+$TTL 1D
+@       IN SOA  station1.example.com  rootstation1.example.com. (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+        NS      station1.example.com.
+        A       127.0.0.1
+206     PTR     station1.example.com.
+209     PTR     station2.example.com.
+
+
+
+firewall-cmd --permanent --add-service=dns
+firewall-cmd --reload
+
+
+vim /etc/resolv.confs
 
 
 

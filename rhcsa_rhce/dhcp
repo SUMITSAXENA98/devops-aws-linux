@@ -1,4 +1,4 @@
-SERVER SIDE : 
+SERVER SIDE :                            DORA process ---> discovery offer request aknowledge
 package : dhcp 
 Daemon : dhcpd 
 file : /etc/dhcp/dhcp.conf 
@@ -17,7 +17,7 @@ how to take ip using dhcp server
  BOOTPROTO = dhcp 
  yum install dhcp* -y 
  cat /etc/dhcp/dhcp.conf   ---> is file m entry karni hoti hai 
- cat  -n /usr/share/doc/dhcp-server/dhcp.conf.example ---->  syntax is file se mil jaiga
+ cat  -n /usr/share/doc/dhcp-server/dhcpd.conf.example ---->  syntax is file se mil jaiga
  copy line 47,55-->
  sed -n "47,55p" /usr/share/doc/dhcp-server/dhcp.confexample
  vim /etc/dhcp/dhcp.conf 

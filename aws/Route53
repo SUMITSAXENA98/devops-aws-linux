@@ -1,0 +1,49 @@
+registring domain 
+hosting Domain
+
+MULTIPLE ROUTING POLICY 
+simple routing policy 
+multi-value routing policy
+weighted routing policy 
+latency routing policy 
+geolocation routing policy
+failover routing policy 
+
+load balancer round robin krta hai 
+
+1.simple
+
+www.sanjaydhaiya.com    CNAME    virgina simple 
+                                 singapore simple
+2.multi-value
+www.sanjaydhaiya.com    CNAME   virginia
+admin.sanjaydhaiya.com  CNAME   virginia 
+
+3.weighted 
+www.sanjaydhaiya.com    CNAME    virgina weighted 75%
+www.sanjaydhaiya.com    CNAME    singapore weighted 25% 
+
+4.latency 
+www.sanjaydhaiya.com    CNAME    virgina latency
+www.sanjaydhaiya.com    CNAME    singapore latency
+
+5.geolocation
+www.sanjaydhaiya.com    CNAME    virgina geolocation
+www.sanjaydhaiya.com    CNAME    singapore geolocation
+
+6. failover 
+www.sanjaydhaiya.com    CNAME    virgina failover primary 
+www.sanjaydhaiya.com    CNAME    singapore failover secondary
+                                          
+
+
+
+                                          ec2
+                                 elb
+                                           ec2
+    route -------------------
+
+
+                                          ec2
+                                 elb
+                                           ec2

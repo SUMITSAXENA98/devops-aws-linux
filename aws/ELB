@@ -1,0 +1,14 @@
+listener 
+target group > default group ,softaware,images,song 
+path based routing 
+security groub > 80 , 443
+health check 
+stickyness 
+connection draining 
+ssl certificate 
+logs 
+waf 
+
+
+lab create 4 machines configure website on them  
+create load balancers

@@ -19,3 +19,18 @@ s3 Requester pay:
 > One zone IA 
 > Deep glacier 
 
+
+
+########### s3 lifecycle rule #########
+60 days ,90 days
+
+######### s3 pricing ##############
+> size of data 
+> based on storage class 
+> data out charge 
+> request put, get ,delete, move, list,(api)
+
+
+####### s3 cross region replication #########
+disaster recovery backup when one region destroyed
+note : > versioning enabled hona chaiye 
